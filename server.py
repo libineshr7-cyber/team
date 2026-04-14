@@ -88,6 +88,14 @@ def log(message: str, type="INFO") -> str:
 async def homepage(request: Request) -> HTMLResponse:
     return HTMLResponse(INDEX_HTML)
 
+async def serve_manifest(request: Request) -> JSONResponse:
+    with open("manifest.json", "r") as f:
+        return JSONResponse(json.load(f))
+
+async def serve_sw(request: Request) -> HTMLResponse:
+    with open("sw.js", "r") as f:
+        return HTMLResponse(content=f.read(), media_type="application/javascript")
+
 async def api_status(request: Request) -> JSONResponse:
     s    = load_state()
     v_path = s.get("vault_path")
@@ -235,6 +243,8 @@ INDEX_HTML = r"""<!DOCTYPE html>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Guardian PRO — 10/10 Ultimate</title>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#00d4ff" />
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -501,6 +511,13 @@ INDEX_HTML = r"""<!DOCTYPE html>
     }, 100);
   }
   async function reset() { await fetch('/api/reset', { method:'POST' }); location.reload(); }
+
+  // PWA Service Worker Registration
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js');
+    });
+  }
 </script>
 </body>
 </html>
@@ -508,6 +525,8 @@ INDEX_HTML = r"""<!DOCTYPE html>
 
 routes = [
     Route("/", homepage),
+    Route("/manifest.json", serve_manifest),
+    Route("/sw.js", serve_sw),
     Route("/api/status", api_status),
     Route("/api/setup", api_setup, methods=["POST"]),
     Route("/api/login", api_login, methods=["POST"]),

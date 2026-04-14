@@ -1,0 +1,17 @@
+{
+  "name": "Guardian Pro Ultimate",
+  "short_name": "Guardian",
+  "description": "AES-256 Encrypted Security Suite",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#03060b",
+  "theme_color": "#00d4ff",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/nolan/512/security-shield.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
