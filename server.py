@@ -532,7 +532,7 @@ routes = [
     Route("/", homepage),
     Route("/manifest.json", serve_manifest),
     Route("/sw.js", serve_sw),
-    Route("/icon.png", serve_icon),
+    Route("/icon_v3.png", serve_icon),
     Route("/api/status", api_status),
     Route("/api/setup", api_setup, methods=["POST"]),
     Route("/api/login", api_login, methods=["POST"]),
