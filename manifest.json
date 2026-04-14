@@ -1,6 +1,6 @@
 {
-  "name": "Guardian Pro Ultimate",
-  "short_name": "Guardian",
+  "name": "V3 Core",
+  "short_name": "V3 Core",
   "description": "AES-256 Encrypted Security Suite",
   "start_url": "/",
   "display": "standalone",
@@ -8,9 +8,9 @@
   "theme_color": "#00d4ff",
   "icons": [
     {
-      "src": "https://img.icons8.com/nolan/512/security-shield.png",
+      "src": "/icon.jpg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/jpeg",
       "purpose": "any maskable"
     }
   ]

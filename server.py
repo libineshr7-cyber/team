@@ -96,6 +96,10 @@ async def serve_sw(request: Request) -> HTMLResponse:
     with open("sw.js", "r") as f:
         return HTMLResponse(content=f.read(), media_type="application/javascript")
 
+async def serve_icon(request: Request) -> HTMLResponse:
+    with open("icon.jpg", "rb") as f:
+        return HTMLResponse(content=f.read(), media_type="image/jpeg")
+
 async def api_status(request: Request) -> JSONResponse:
     s    = load_state()
     v_path = s.get("vault_path")
@@ -242,7 +246,7 @@ INDEX_HTML = r"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Guardian PRO — 10/10 Ultimate</title>
+  <title>V3 Core — Security Suite</title>
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#00d4ff" />
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
@@ -349,7 +353,7 @@ INDEX_HTML = r"""<!DOCTYPE html>
 
 <div class="app">
   <aside>
-    <div class="brand"><h2>GUARDIAN·ULT</h2><p style="font-size:0.6rem; color:var(--text-dim); letter-spacing:2px">SECURITY SUITE v2.0</p></div>
+    <div class="brand"><h2>V3 CORE</h2><p style="font-size:0.6rem; color:var(--text-dim); letter-spacing:2px">ENCRYPTED OPERATING SYSTEM</p></div>
     <nav>
       <button class="nav-btn active" id="btn-config" onclick="show('config')">⚙ Configuration</button>
       <button class="nav-btn" id="btn-sim" onclick="show('sim')">⚡ Simulation</button>
@@ -527,6 +531,7 @@ routes = [
     Route("/", homepage),
     Route("/manifest.json", serve_manifest),
     Route("/sw.js", serve_sw),
+    Route("/icon.jpg", serve_icon),
     Route("/api/status", api_status),
     Route("/api/setup", api_setup, methods=["POST"]),
     Route("/api/login", api_login, methods=["POST"]),
@@ -537,7 +542,7 @@ app = Starlette(routes=routes)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     print("\n" + "="*60)
-    print("  GUARDIAN PRO - ULTIMATE (10/10 EDITION)")
+    print("  V3 CORE - ULTIMATE (10/10 EDITION)")
     print(f"  DASHBOARD: http://localhost:{port}")
     print("="*60 + "\n")
     uvicorn.run(app, host="0.0.0.0", port=port, log_level="warning")
