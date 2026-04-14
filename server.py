@@ -97,7 +97,7 @@ async def serve_sw(request: Request) -> HTMLResponse:
         return HTMLResponse(content=f.read(), media_type="application/javascript")
 
 async def serve_icon(request: Request) -> HTMLResponse:
-    with open("icon.png", "rb") as f:
+    with open("icon_v3.png", "rb") as f:
         return HTMLResponse(content=f.read(), media_type="image/png")
 
 async def api_status(request: Request) -> JSONResponse:
@@ -248,6 +248,7 @@ INDEX_HTML = r"""<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>V3 Core — Security Suite</title>
   <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/png" href="/icon_v3.png" />
   <meta name="theme-color" content="#00d4ff" />
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
