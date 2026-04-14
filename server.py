@@ -97,8 +97,8 @@ async def serve_sw(request: Request) -> HTMLResponse:
         return HTMLResponse(content=f.read(), media_type="application/javascript")
 
 async def serve_icon(request: Request) -> HTMLResponse:
-    with open("icon.jpg", "rb") as f:
-        return HTMLResponse(content=f.read(), media_type="image/jpeg")
+    with open("icon.png", "rb") as f:
+        return HTMLResponse(content=f.read(), media_type="image/png")
 
 async def api_status(request: Request) -> JSONResponse:
     s    = load_state()
@@ -531,7 +531,7 @@ routes = [
     Route("/", homepage),
     Route("/manifest.json", serve_manifest),
     Route("/sw.js", serve_sw),
-    Route("/icon.jpg", serve_icon),
+    Route("/icon.png", serve_icon),
     Route("/api/status", api_status),
     Route("/api/setup", api_setup, methods=["POST"]),
     Route("/api/login", api_login, methods=["POST"]),
