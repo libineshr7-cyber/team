@@ -1,0 +1,76 @@
+╔══════════════════════════════════════════════════════════════════╗
+║         GUARDIAN PRO — QUICK REFERENCE CARD                     ║
+╚══════════════════════════════════════════════════════════════════╝
+
+LAUNCH COMMANDS
+───────────────────────────────────────────────────────────────────
+  python3 guardian_pro.py          # Unified launcher (recommended)
+  python3 run_demo.py              # Full guided CLI demo
+  python3 server.py                # Web dashboard → http://localhost:8080
+  python3 login.py                 # Manual login shell
+  python3 brute.py                 # Brute-force attack only
+
+RESET (fresh start)
+───────────────────────────────────────────────────────────────────
+  rm -f protected.txt access_log.txt guardian_state.json
+
+KEY CONFIGURATION — login.py
+───────────────────────────────────────────────────────────────────
+  CORRECT_PASSWORD  = "742"    # Change to adjust target
+  MAX_ATTEMPTS      = 3        # Failures before self-destruct
+  DELAY_SECONDS     = 2        # Rate-limit pause (seconds)
+  WIPE_PASSES       = 3        # Overwrite passes before deletion
+
+KEY CONFIGURATION — brute.py
+───────────────────────────────────────────────────────────────────
+  PASSWORD_MIN      = 0        # Search start
+  PASSWORD_MAX      = 999      # Search end  (1000 candidates)
+  ATTACK_DELAY      = 0.1      # Seconds between attempts
+
+SCENARIOS
+───────────────────────────────────────────────────────────────────
+  Attacker WINS   → set CORRECT_PASSWORD = "000"  (found at attempt #1)
+  Attacker LOSES  → default "742" triggers lockout after 3 tries
+  No self-destruct→ set MAX_ATTEMPTS = 9999 (effectively unlimited)
+
+AUDIT LOG EVENTS
+───────────────────────────────────────────────────────────────────
+  SYSTEM_ARMED       System configured and ready
+  AUTH_SUCCESS       Correct password accepted
+  AUTH_FAILURE       Wrong password; strike count shown
+  INTRUSION_DETECTED Threshold breached; wipe starting
+  SECURITY_EVENT     File physically deleted from disk
+  SYSTEM_RESET       Clean state restored
+  OS_ERROR           Filesystem operation failed
+
+WEB DASHBOARD TABS
+───────────────────────────────────────────────────────────────────
+  Configuration     Arm system with file path + passphrase
+  Secure Vault      Manual login with strike meter
+  Attack Simulator  Automated 000→999 brute-force with live feed
+  Audit Logs        Colour-coded event stream (auto-refresh 3s)
+
+SECURITY CONCEPTS COVERED
+───────────────────────────────────────────────────────────────────
+  1. SHA-256 cryptographic hashing
+  2. Password never stored in plaintext
+  3. Rate limiting (timed delay per failure)
+  4. Intrusion detection (threshold-based)
+  5. Secure multi-pass file wiping (DoD-inspired)
+  6. Forensic audit logging
+  7. Attack simulation & analysis
+  8. Simulation vs live operational modes
+
+INSTALL WEB DASHBOARD DEPENDENCIES
+───────────────────────────────────────────────────────────────────
+  pip install uvicorn starlette
+
+PYTHON VERSION REQUIREMENT
+───────────────────────────────────────────────────────────────────
+  Python 3.8 or higher
+  python3 --version
+
+═══════════════════════════════════════════════════════════════════
+  ⚠  EDUCATIONAL USE ONLY — run only on systems you own or have
+     explicit written permission to test.
+═══════════════════════════════════════════════════════════════════
